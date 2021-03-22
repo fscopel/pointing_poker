@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "358194555939",
+    "project_id": "pointingpoker-17619",
+    "storage_bucket": "pointingpoker-17619.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358194555939:android:ecc5584cbc21ec8c9bd596",
+        "android_client_info": {
+          "package_name": "com.fabioscopel.pointing_poker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358194555939-joqbpus89rgq2i1340vb716b5l6vnf4e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB33jctqHli_qI4KgqhlnxzjV21oUaccw0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358194555939-joqbpus89rgq2i1340vb716b5l6vnf4e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
