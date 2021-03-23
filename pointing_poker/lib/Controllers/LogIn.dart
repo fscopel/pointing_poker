@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:pointing_poker/models/player.dart';
 import 'package:signalr_core/signalr_core.dart';
 import 'PartyRoom.dart';
 
@@ -95,14 +96,14 @@ class _LogInState extends State<LogIn> {
     if (widget.connection.state == HubConnectionState.connected &&
         txtName.text != "" &&
         txtNumberInParty.text != "") {
-      await widget.connection
-          .invoke('JoinRoom', args: [txtName.text, txtNumberInParty.text]);
+      var player =
+          Player.create(txtName.text, int.parse(txtNumberInParty.text));
+      await widget.connection.invoke('JoinRoom', args: [player.toJson()]);
 
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => PartyRoom(
-                  int.parse(txtNumberInParty.text), txtName.text, connection)));
+              builder: (context) => PartyRoom(player, connection)));
     } else {
       //TODO: Handle other connection states here;
     }
@@ -116,14 +117,13 @@ class _LogInState extends State<LogIn> {
 
     if (widget.connection.state == HubConnectionState.connected &&
         txtName.text != "") {
-      await widget.connection
-          .invoke('JoinRoom', args: [txtName.text, roomNumber.toString()]);
+      var player = Player.create(txtName.text, roomNumber);
+      await widget.connection.invoke('JoinRoom', args: [player.toJson()]);
 
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  PartyRoom(roomNumber, txtName.text, connection)));
+              builder: (context) => PartyRoom(player, connection)));
     }
   }
 }
