@@ -11,8 +11,6 @@ namespace PointingPokerServer
         public async Task JoinRoom(string userName, string roomName)
         {
             await Groups.AddToGroupAsync(Context.ConnectionId, roomName);
-
-            await Clients.Group(roomName).SendAsync("ReceiveMessage", userName, $"Joined Room: {roomName}");
         }
 
         public async Task LeaveRoom(string roomName)
