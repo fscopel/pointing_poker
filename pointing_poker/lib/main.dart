@@ -1,15 +1,13 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:signalr_core/signalr_core.dart';
-import 'Controllers/LogIn.dart';
-import 'Controllers/PartyRoom.dart';
+import 'Controllers/log_in.dart';
 import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 
-Future<void> main(List<String> arguments) async {
+Future<void> main() async {
   configureApp();
   final connection = HubConnectionBuilder()
       .withUrl(
-          'https://localhost:44366/chatHub',
+          'https://flutterprojects.dev/server/chatHub',
           HttpConnectionOptions(
             logging: (level, message) => print(message),
           ))

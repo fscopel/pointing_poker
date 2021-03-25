@@ -1,8 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:pointing_poker/Controllers/party_room.dart';
 import 'package:pointing_poker/models/player.dart';
 import 'package:signalr_core/signalr_core.dart';
-import 'PartyRoom.dart';
 
 class LogIn extends StatefulWidget {
   HubConnection connection;

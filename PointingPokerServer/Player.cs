@@ -9,8 +9,9 @@ namespace PointingPokerServer
     {
         public int guestId { get; set; }
         public int roomNumber { get; set; }
-        public int vote { get; set; }
+        public string vote { get; set; }
         public string name { get; set; }
+        public bool isVisible { get; set; }
 
     }
 }

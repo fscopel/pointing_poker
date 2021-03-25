@@ -75,7 +75,8 @@ namespace PointingPokerServer
                 var players = JsonConvert.DeserializeObject<List<Player>>(playersInRoom);
                 foreach (var player in players)
                 {
-                    player.vote = 0;
+                    player.vote = "0";
+                    player.isVisible = false;
                 }
 
                 var playersJson = JsonConvert.SerializeObject(players);
@@ -83,7 +84,23 @@ namespace PointingPokerServer
                 await Clients.Group(cacheKey).SendAsync("ReceiveLatestList", playersJson);
             }
         }
+        public async Task ShowAll(string cacheKey, bool isVisible)
+        {
 
+            var playersInRoom = _distributedCache.GetString(cacheKey);
+            if (playersInRoom != null)
+            {
+                var players = JsonConvert.DeserializeObject<List<Player>>(playersInRoom);
+                foreach (var player in players)
+                {
+                    player.isVisible = isVisible;
+                }
+
+                var playersJson = JsonConvert.SerializeObject(players);
+                _distributedCache.SetString(cacheKey, playersJson);
+                await Clients.Group(cacheKey).SendAsync("ReceiveLatestList", playersJson);
+            }
+        }
 
         public async Task LeaveRoom(string roomName)
         {
