@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,12 @@ namespace PointingPokerServer
     public class SignalRChat : Hub
     {
         private readonly IDistributedCache _distributedCache;
+        private readonly ILogger _logger;
 
-        public SignalRChat(IDistributedCache distributedCache)
+        public SignalRChat(IDistributedCache distributedCache, ILogger<SignalRChat> logger)
         {
             _distributedCache = distributedCache;
+            _logger = logger;
         }
 
         public async Task JoinRoom(string playerJson)

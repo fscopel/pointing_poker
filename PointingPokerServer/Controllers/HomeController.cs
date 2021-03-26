@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,13 @@ namespace PointingPokerServer.Controllers
 	public class HomeController : Controller
 	{
 		private readonly IDistributedCache _distributedCache;
+        private readonly ILogger _logger;
 
-		public HomeController(IDistributedCache distributedCache)
+        public HomeController(IDistributedCache distributedCache, ILogger<HomeController> logger)
 		{
 			_distributedCache = distributedCache;
+			_logger = logger;
+			logger.LogInformation("Hello");
 		}
 
 		[HttpGet]
@@ -24,6 +28,8 @@ namespace PointingPokerServer.Controllers
 			var existingTime = _distributedCache.GetString(cacheKey);
 			if (!string.IsNullOrEmpty(existingTime))
 			{
+				_logger.LogInformation($"Fetched from cache : {existingTime}");
+
 				return "Fetched from cache : " + existingTime;
 			}
 			else
