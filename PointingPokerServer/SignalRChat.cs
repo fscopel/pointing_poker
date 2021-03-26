@@ -21,6 +21,33 @@ namespace PointingPokerServer
             _logger = logger;
         }
 
+        public override Task OnConnectedAsync()
+        {
+            return base.OnConnectedAsync();
+        }
+
+        public override Task OnDisconnectedAsync(Exception exception)
+        {
+
+            var roomNumber = _distributedCache.GetString(Context.ConnectionId);
+            if (roomNumber != null)
+            {
+                var playersInRoom = _distributedCache.GetString(roomNumber);
+                if (playersInRoom != null)
+                {
+                    var players = JsonConvert.DeserializeObject<List<Player>>(playersInRoom);
+                    players.Remove(players.Find(p => p.connectionId == Context.ConnectionId));
+                    _distributedCache.SetString(roomNumber, JsonConvert.SerializeObject(players));
+
+                    GetLatestList(roomNumber);
+                }
+            }
+
+                return base.OnDisconnectedAsync(exception);
+        }
+
+
+
         public async Task JoinRoom(string playerJson)
         {
             var player = JsonConvert.DeserializeObject<Player>(playerJson);
@@ -38,17 +65,22 @@ namespace PointingPokerServer
                 }
                 else
                 {
+                    player.connectionId = Context.ConnectionId;
                     players.Add(player);
                     _distributedCache.SetString(cacheKey, JsonConvert.SerializeObject(players));
+                    _distributedCache.SetString(Context.ConnectionId, player.roomNumber.ToString());
                 }
             }
             else {
                 var players = new List<Player>();
+                player.connectionId = Context.ConnectionId;
                 players.Add(player);
                 _distributedCache.SetString(cacheKey, JsonConvert.SerializeObject(players));
             }
             
         }
+
+        
 
         public async Task SetVote(string playerJson)
         {

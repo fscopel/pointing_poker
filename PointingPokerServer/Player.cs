@@ -7,6 +7,7 @@ namespace PointingPokerServer
 {
     public class Player
     {
+        public string connectionId { get; set; }
         public int guestId { get; set; }
         public int roomNumber { get; set; }
         public string vote { get; set; }

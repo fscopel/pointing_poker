@@ -7,7 +7,8 @@ Future<void> main() async {
   configureApp();
   final connection = HubConnectionBuilder()
       .withUrl(
-          'https://flutterprojects.dev/server/chatHub',
+          //'https://flutterprojects.dev/server/chatHub',
+          'https://localhost:44366/chatHub',
           HttpConnectionOptions(
             logging: (level, message) => print(message),
           ))
