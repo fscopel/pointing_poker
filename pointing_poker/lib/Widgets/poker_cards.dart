@@ -18,6 +18,7 @@ class _PokerCardState extends State<PokerCard> {
   double cardWidth;
   TextStyle fontStyle, largeFont;
   BoxShadow _boxShadow;
+  bool isSelected;
 
   @override
   void initState() {
@@ -30,6 +31,7 @@ class _PokerCardState extends State<PokerCard> {
       offset: const Offset(3.0, 3.0),
       blurRadius: 5.0,
     );
+    isSelected = false;
   }
 
   @override
@@ -38,7 +40,11 @@ class _PokerCardState extends State<PokerCard> {
       padding: EdgeInsets.all(8.0),
       child: Column(children: [
         InkWell(
-          onTap: () {},
+          onTap: () {
+            setState(() {
+              isSelected = !isSelected;
+            });
+          },
           onHover: (value) {
             setState(() {
               if (value == true) {
@@ -59,7 +65,7 @@ class _PokerCardState extends State<PokerCard> {
             height: cardWidth * 1.4,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
-                color: Colors.white,
+                color: isSelected ? Colors.lightBlueAccent : Colors.white,
                 boxShadow: [_boxShadow]),
             child: Column(
               children: [
@@ -85,7 +91,8 @@ class _PokerCardState extends State<PokerCard> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(color: Colors.black),
-                        color: Colors.white,
+                        color:
+                            isSelected ? Colors.lightBlueAccent : Colors.white,
                       ),
                       child: Center(
                           child: Text(
