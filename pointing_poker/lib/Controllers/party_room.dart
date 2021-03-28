@@ -61,7 +61,7 @@ class _PartyRoomState extends State<PartyRoom> {
         title: Text('Flutter - Pointing Poker for the Web'),
       ),
       body: Container(
-        color: Colors.deepPurple[100],
+        color: Colors.white,
         child: Center(
           child: Column(
             children: [
@@ -72,40 +72,45 @@ class _PartyRoomState extends State<PartyRoom> {
                   style: TextStyle(fontSize: 26),
                 ),
               ),
-              Cards(player, connection),
-              Expanded(
-                child: Container(
-                  //color: Colors.amber,
-                  height: 500,
-                  width: 380,
-                  child: ListView.builder(
-                      padding: EdgeInsets.all(8),
-                      itemCount: players.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Container(
-                          //color: Colors.red,
-                          height: 50,
-                          width: 50,
-                          child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                players[index].vote != '0'
-                                    ? Icon(Icons.check_box_outlined)
-                                    : Icon(Icons.check_box_outline_blank),
-                                Expanded(
-                                    flex: 2,
-                                    child: Text('${players[index].name}',
-                                        style: textStyle)),
-                                players[index].isVisible
-                                    ? Text('${players[index].vote}',
-                                        style: textStyle)
-                                    : Icon(Icons.security),
-                              ]),
-                        );
-                      }),
-                ),
-              )
+              Row(
+                children: [
+                  Cards(player, connection),
+                  Expanded(
+                    child: Container(
+                      //color: Colors.amber,
+                      height: 500,
+                      width: 380,
+                      child: ListView.builder(
+                          padding: EdgeInsets.all(8),
+                          itemCount: players.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Container(
+                              //color: Colors.red,
+                              height: 50,
+                              width: 50,
+                              child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    players[index].vote != '0'
+                                        ? Icon(Icons.check_box_outlined)
+                                        : Icon(Icons.check_box_outline_blank),
+                                    Expanded(
+                                        flex: 2,
+                                        child: Text('${players[index].name}',
+                                            style: textStyle)),
+                                    players[index].isVisible
+                                        ? Text('${players[index].vote}',
+                                            style: textStyle)
+                                        : Icon(Icons.security),
+                                  ]),
+                            );
+                          }),
+                    ),
+                  )
+                ],
+              ),
             ],
           ),
         ),

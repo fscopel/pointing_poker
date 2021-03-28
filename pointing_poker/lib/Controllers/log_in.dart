@@ -58,7 +58,7 @@ class _LogInState extends State<LogIn> {
                       height: 120,
                       width: 150,
                       child: ElevatedButton(
-                          onPressed: StartNewParty,
+                          onPressed: startNewParty,
                           child: Text('Start new party')),
                     ),
                     SizedBox(
@@ -77,7 +77,7 @@ class _LogInState extends State<LogIn> {
                                 InputDecoration(labelText: 'Party number'),
                           ),
                           ElevatedButton(
-                              onPressed: () => JoinPartyClick(),
+                              onPressed: () => joinPartyClick(),
                               child: Text('Join a party')),
                         ],
                       ),
@@ -92,7 +92,7 @@ class _LogInState extends State<LogIn> {
     );
   }
 
-  Future<void> JoinPartyClick() async {
+  Future<void> joinPartyClick() async {
     if (widget.connection.state == HubConnectionState.connected &&
         txtName.text != "" &&
         txtNumberInParty.text != "") {
@@ -109,7 +109,7 @@ class _LogInState extends State<LogIn> {
     }
   }
 
-  Future StartNewParty() async {
+  Future startNewParty() async {
     int min = 100000; //min and max values act as your 6 digit range
     int max = 999999;
     var random = new Random();

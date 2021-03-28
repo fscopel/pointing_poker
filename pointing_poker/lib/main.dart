@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:signalr_core/signalr_core.dart';
 import 'Controllers/log_in.dart';
+import 'Screens/gameRoom.dart';
 import 'configure_nonweb.dart' if (dart.library.html) 'configure_web.dart';
 
 Future<void> main() async {
   configureApp();
+
+  return runApp(GameRoom());
+
   final connection = HubConnectionBuilder()
       .withUrl(
           //'https://flutterprojects.dev/server/chatHub',
@@ -16,43 +20,26 @@ Future<void> main() async {
 
   await connection.start();
 
-  runApp(MyApp(connection));
+  runApp(HomeApp(connection));
 }
 
-class MyApp extends StatefulWidget {
+class HomeApp extends StatefulWidget {
   HubConnection connection;
 
-  MyApp(this.connection);
+  HomeApp(this.connection);
 
   @override
-  _MyAppState createState() => _MyAppState(connection);
+  _HomeAppState createState() => _HomeAppState(connection);
 }
 
-class _MyAppState extends State<MyApp> {
+class _HomeAppState extends State<HomeApp> {
   HubConnection connection;
 
-  _MyAppState(this.connection);
+  _HomeAppState(this.connection);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-/*      onGenerateRoute: (settings) {
-        // Handle '/'
-        if (settings.name == '/') {
-          return MaterialPageRoute(builder: (context) => HomeScreen());
-        }
-
-        // Handle '/details/:id'
-        var uri = Uri.parse(settings.name);
-        if (uri.pathSegments.length == 2 && settings.name == '/') {
-          var id = uri.pathSegments[1];
-          return MaterialPageRoute(
-              builder: (context) =>
-                  PartyRoom(int.parse(id), 'URL Segment', connection));
-        }
-
-        return MaterialPageRoute(builder: (context) => LogIn(connection));
-      },*/
       title: 'Pointing Poker',
       theme: ThemeData(primarySwatch: Colors.deepPurple),
       home: Scaffold(

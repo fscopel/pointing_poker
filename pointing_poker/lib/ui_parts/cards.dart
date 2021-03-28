@@ -56,15 +56,21 @@ class _CardsState extends State<Cards> {
                 votingCard('1'),
                 votingCard('2'),
                 votingCard('3'),
-                votingCard('5'),
               ]),
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                votingCard('5'),
                 votingCard('8'),
                 votingCard('13'),
+              ]),
+          Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 votingCard('21'),
+                votingCard('34'),
                 votingCard('?'),
               ]),
         ],
@@ -105,18 +111,20 @@ class _CardsState extends State<Cards> {
   }
 
   Widget votingCard(String points) {
-    return Card(
-      color: Color(0xFF8455DB),
-      shadowColor: Color(0xFF5F2DB6),
-      child: InkWell(
-        splashColor: Colors.white.withAlpha(50),
-        onTap: () => vote(points),
-        child: SizedBox(
-          width: 75,
-          height: 100,
-          child: Center(
-            child: Text('$points',
-                style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
+    return Container(
+      child: Card(
+        color: Color(0xFF673AB6),
+        shadowColor: Colors.black12,
+        child: InkWell(
+          splashColor: Colors.white.withAlpha(50),
+          onTap: () => vote(points),
+          child: SizedBox(
+            width: 75,
+            height: 100,
+            child: Center(
+              child: Text('$points',
+                  style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
+            ),
           ),
         ),
       ),
