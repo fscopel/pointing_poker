@@ -19,6 +19,9 @@ class _PokerCardState extends State<PokerCard> {
   TextStyle fontStyle, largeFont;
   BoxShadow _boxShadow;
   bool isSelected;
+  var defaultOffSet = Offset(0.0, 5.0);
+  var liftedOffSet = Offset(0.0, 10.0);
+  double blurRadius = 1.50;
 
   @override
   void initState() {
@@ -28,8 +31,8 @@ class _PokerCardState extends State<PokerCard> {
     fontStyle = GoogleFonts.getFont('Open Sans');
     largeFont = GoogleFonts.getFont('Open Sans', fontSize: 40);
     _boxShadow = BoxShadow(
-      offset: const Offset(3.0, 3.0),
-      blurRadius: 5.0,
+      offset: defaultOffSet,
+      blurRadius: blurRadius,
     );
     isSelected = false;
   }
@@ -49,13 +52,13 @@ class _PokerCardState extends State<PokerCard> {
             setState(() {
               if (value == true) {
                 _boxShadow = BoxShadow(
-                  offset: const Offset(5.0, 5.0),
-                  blurRadius: 10.0,
+                  offset: liftedOffSet,
+                  blurRadius: blurRadius,
                 );
               } else {
                 _boxShadow = BoxShadow(
-                  offset: const Offset(3.0, 3.0),
-                  blurRadius: 5.0,
+                  offset: defaultOffSet,
+                  blurRadius: blurRadius,
                 );
               }
             });
